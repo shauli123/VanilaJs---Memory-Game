@@ -179,5 +179,21 @@ hpBtn.addEventListener('click', (e) => {
 
     });
 });
+// bonus 'random start' +20
+const randomMode = () => {
+  switch (Math.floor(Math.random() * 3)){
+    case 0:
+      catBtn.click();
+      break;
+    case 1:
+      dogBtn.click();
+      break;
+    case 2:
+      hpBtn.click();
+      break;
+  }
+
+}
+randomMode();
 // we will add a "click" event listener that will trigger flipCard on every card element
 cards.forEach((card) => card.addEventListener("click", flipCard));
