@@ -86,7 +86,7 @@ function resetBoard() {
 
 // This function shuffles the cards
 // we are calling this fucntion imidietly when the game start and this is why we have () in the end of the function
-(function() {
+(function () {
   cards.forEach((card) => {
     // create a random number between 0 - 11
     let randomPos = Math.floor(Math.random() * 12);
@@ -99,28 +99,52 @@ function resetBoard() {
 
 catBtn.addEventListener('click', (e) => {
   fetch('https://api.thecatapi.com/v1/images/search?limit=10')
-  .then((response) => response.json())
-  .then((data) => {
-  console.log(data); 
-  let counter = 0;
-  data.forEach((image) => {
-    if (counter < 6){
-    let img = image.url;
-    console.log(img);
-    cards.forEach((card) => {
-    // console.log(card.lastChild);
-      let fimg = card.querySelector('.front-face');
-      if (card.dataset.framework == String(counter+1)) {
-      fimg.src = img;
-      console.log(fimg);
-    };
+    .then((response) => response.json())
+    .then((data) => {
+      console.log(data);
+      let counter = 0;
+      data.forEach((image) => {
+        if (counter < 6) {
+          let img = image.url;
+          console.log(img);
+          cards.forEach((card) => {
+            // console.log(card.lastChild);
+            let fimg = card.querySelector('.front-face');
+            if (card.dataset.framework == String(counter + 1)) {
+              fimg.src = img;
+              console.log(fimg);
+            };
+
+          });
+          counter++;
+        };
+      })
 
     });
-    counter++;
-  };   
-  })
+});
+dogBtn.addEventListener('click', () => {
+  let counter = 0;
 
+  const fetchDogImage = () => {
+    if (counter >= 6) return;
+    fetch('https://dog.ceo/api/breeds/image/random')
+      .then(response => response.json())
+      .then(data => {
+        console.log(data);
+        const img = data.message;
+        cards.forEach(card => {
+          let fimg = card.querySelector('.front-face');
+          if (card.dataset.framework == String(counter + 1)) {
+            fimg.src = img;
+          }
+        });
+        counter++;
+        fetchDogImage();
+      })
+  };
+
+  fetchDogImage();
 });
-});
+
 // we will add a "click" event listener that will trigger flipCard on every card element
 cards.forEach((card) => card.addEventListener("click", flipCard));
