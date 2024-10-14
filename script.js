@@ -1,6 +1,8 @@
 // Select all the cards from the HTML file
 const cards = document.querySelectorAll(".memory-card");
-
+const catBtn = document.querySelector('#catBtn');
+const dogBtn = document.querySelector('#dogBtn');
+const hpBtn = document.querySelector('#hpBtn');
 // Flag for letting us know if a card already been fliped
 let hasFlippedCard = false;
 
@@ -95,6 +97,30 @@ function resetBoard() {
 })();
 
 
+catBtn.addEventListener('click', (e) => {
+  fetch('https://api.thecatapi.com/v1/images/search?limit=10')
+  .then((response) => response.json())
+  .then((data) => {
+  console.log(data); 
+  let counter = 0;
+  data.forEach((image) => {
+    if (counter < 6){
+    let img = image.url;
+    console.log(img);
+    cards.forEach((card) => {
+    // console.log(card.lastChild);
+      let fimg = card.querySelector('.front-face');
+      if (card.dataset.framework == String(counter+1)) {
+      fimg.src = img;
+      console.log(fimg);
+    };
 
+    });
+    counter++;
+  };   
+  })
+
+});
+});
 // we will add a "click" event listener that will trigger flipCard on every card element
 cards.forEach((card) => card.addEventListener("click", flipCard));
