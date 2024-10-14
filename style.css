@@ -6,7 +6,7 @@
 
 body {
   height: 100vh;
-  display: flex;
+  /* display: flex; */
   background: #060ab2;
 }
 
@@ -52,4 +52,9 @@ body {
 
 .front-face {
   transform: rotateY(180deg);
+}
+.btnDiv{
+  height: fit-content;
+  display: flex;
+  justify-content: space-evenly ;
 }
