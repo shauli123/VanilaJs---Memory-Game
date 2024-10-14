@@ -9,7 +9,7 @@ let hasFlippedCard = false;
 // Flag for locking the borad when two cards been fliped
 // Prevent us from flipping more cards when our app calculte the results
 let lockBoard = false;
-
+matchedDuos = 0;
 // Variables for saving the current card selections after the user choosed to flip them
 let firstCard, secondCard;
 
@@ -53,7 +53,7 @@ function checkForMatch() {
 function disableCards() {
   firstCard.removeEventListener("click", flipCard);
   secondCard.removeEventListener("click", flipCard);
-
+  matchedDuos++;
   // we should call reset to make sure that the user can now chose again two cards
   resetBoard();
 }
@@ -82,6 +82,26 @@ function resetBoard() {
   // [firstCard, secondCard] = [null, null];
   firstCard = null;
   secondCard = null;
+  if (matchedDuos == 6) {
+    Swal.fire({
+      title: "Want To Play Again?",
+      // text: "You won't be able to revert this!",
+      icon: "success",
+      showCancelButton: true,
+      confirmButtonColor: "#22bb33",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Play Again"
+    }).then((result) => {
+      if (result.isConfirmed) {
+        // Swal.fire({
+        //   title: "Deleted!",
+        //   text: "Your file has been deleted.",
+        //   icon: "success"
+        // });
+        window.location.reload();
+      }
+    });
+  }
 }
 
 // This function shuffles the cards
@@ -203,3 +223,21 @@ const randomMode = () => {
 randomMode();
 // we will add a "click" event listener that will trigger flipCard on every card element
 cards.forEach((card) => card.addEventListener("click", flipCard));
+// Swal.fire({
+//   title: "Want To Play Again?",
+//   // text: "You won't be able to revert this!",
+//   icon: "success",
+//   showCancelButton: true,
+//   confirmButtonColor: "#22bb33",
+//   cancelButtonColor: "#d33",
+//   confirmButtonText: "Play Again"
+// }).then((result) => {
+//   if (result.isConfirmed) {
+//     // Swal.fire({
+//     //   title: "Deleted!",
+//     //   text: "Your file has been deleted.",
+//     //   icon: "success"
+//     // });
+//     window.location.reload();
+//   }
+// });
