@@ -108,7 +108,6 @@ catBtn.addEventListener('click', (e) => {
           let img = image.url;
           console.log(img);
           cards.forEach((card) => {
-            // console.log(card.lastChild);
             let fimg = card.querySelector('.front-face');
             if (card.dataset.framework == String(counter + 1)) {
               fimg.src = img;
@@ -145,6 +144,40 @@ dogBtn.addEventListener('click', () => {
 
   fetchDogImage();
 });
+hpBtn.addEventListener('click', (e) => {
+  fetch('https://hp-api.onrender.com/api/characters')
+    .then((response) => response.json())
+    .then((data) => {
+      console.log(data);
+      let counter = 0;
+      let randomC = [];
+      while (randomC.length < 6) {
+        let char
+        do{
+        let charNum = Math.floor(Math.random() * 20);
+        char = data[charNum];
+        }
+        while (randomC.includes(char));
+        console.log(char);
+        randomC.push(char);
+      }
+      randomC.forEach((image) => {
+        if (counter < 6) {
+          let img = image.image;
+          console.log(img);
+          cards.forEach((card) => {
+            let fimg = card.querySelector('.front-face');
+            if (card.dataset.framework == String(counter + 1)) {
+              fimg.src = img;
+              // console.log(fimg);
+            };
 
+          });
+          counter++;
+        };
+      })
+
+    });
+});
 // we will add a "click" event listener that will trigger flipCard on every card element
 cards.forEach((card) => card.addEventListener("click", flipCard));
