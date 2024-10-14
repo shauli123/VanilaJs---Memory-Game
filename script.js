@@ -109,6 +109,8 @@ catBtn.addEventListener('click', (e) => {
           console.log(img);
           cards.forEach((card) => {
             let fimg = card.querySelector('.front-face');
+            let bimg = card.querySelector('.back-face');
+            bimg.src = 'https://w0.peakpx.com/wallpaper/333/547/HD-wallpaper-cat-avengers-capitain-digital-art-end-game-iron-man-purple-thor-wars.jpg';
             if (card.dataset.framework == String(counter + 1)) {
               fimg.src = img;
               console.log(fimg);
@@ -133,6 +135,8 @@ dogBtn.addEventListener('click', () => {
         const img = data.message;
         cards.forEach(card => {
           let fimg = card.querySelector('.front-face');
+          let bimg = card.querySelector('.back-face');
+          bimg.src = 'https://www.theneedlepointer.com/stores/npoint/images/o/w/PHDG-001/PHDG-001.jpg';
           if (card.dataset.framework == String(counter + 1)) {
             fimg.src = img;
           }
@@ -167,6 +171,8 @@ hpBtn.addEventListener('click', (e) => {
           console.log(img);
           cards.forEach((card) => {
             let fimg = card.querySelector('.front-face');
+            let bimg = card.querySelector('.back-face');
+            bimg.src = 'https://static1.srcdn.com/wordpress/wp-content/uploads/2023/11/harry-potter-franchise-poster.jpeg';
             if (card.dataset.framework == String(counter + 1)) {
               fimg.src = img;
               // console.log(fimg);
